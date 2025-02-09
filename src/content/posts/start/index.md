@@ -11,15 +11,10 @@ The last two years I have been making various little python scripts, learning a 
 I have set my goals high, but I think it's possible. even if I don't finish, who cares? I will still have learnt a lot, and be a thousand steps ahead of where I am right now.
 
 - Flask, Django, API Design, Database, Scaling
-
 - Python - More libraries (Selenium, Tesseract, numpy, pandas, pygame, Manim.... the list goes on and on)
-
 - HTML, CSS, JS, TS, Tailwind, React, Svelte, etc etc
-
 - One or more programming languages
-
 - Linux, Git, Docker, VMS, K8s, AWS, Firebase
-
 - Networking(computers), Networking(people)
 
 ## My plan
