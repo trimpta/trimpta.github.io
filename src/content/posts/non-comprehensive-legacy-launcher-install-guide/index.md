@@ -1,6 +1,6 @@
 ---
-title: "Non comprehensive Legacy launcher install guide"
-description: "Legacy launcher & FO Modpack install guide"
+title: "Play Minecraft with High FPS Using Legacy Launcher & FO Modpack"
+description: "Learn how to install Legacy Launcher and set up the Fabulously Optimized modpack to boost your Minecraft FPS and get the best performance."
 date: "2024-08-07"
 ---
 
