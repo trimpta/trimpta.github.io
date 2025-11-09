@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), tailwind()],
   redirects: {
     '/jwt': {
-      status: 301,
+      status: 302,
       destination: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     },
   },
