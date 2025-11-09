@@ -11,6 +11,12 @@ import { SITE_URL } from "./src/consts";
 export default defineConfig({
   site: SITE_URL,
   integrations: [mdx(), sitemap(), tailwind()],
+  redirects: {
+    '/jwt': {
+      status: 301,
+      destination: 'http://youtube.comwatch?v=dQw4w9WgXcq',
+    },
+  },
   markdown: {
     shikiConfig: {
       themes: {
