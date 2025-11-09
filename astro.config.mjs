@@ -14,7 +14,7 @@ export default defineConfig({
   redirects: {
     '/jwt': {
       status: 301,
-      destination: 'http://youtube.comwatch?v=dQw4w9WgXcq',
+      destination: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     },
   },
   markdown: {
