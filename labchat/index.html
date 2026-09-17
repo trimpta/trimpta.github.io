@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabChat</title>
+    <style>
+        :root {
+            --bg-color: #1e1e1e;
+            --text-color: #d4d4d4;
+            --accent-color: #4CAF50;
+            --code-bg: #2d2d2d;
+            --border-color: #404040;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        h1, h2, h3 {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaaaaa;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 8px 16px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            margin-bottom: -16px; /* Pull pre up */
+            position: relative;
+            z-index: 1;
+        }
+
+        .code-header span {
+            font-family: monospace;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .copy-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+
+        .copy-btn.copied {
+            background-color: #2e7d32;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>LabChat</h1>
+    <p class="subtitle">A zero-dependency Python terminal chat application for local networks.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li>Zero external dependencies</li>
+        <li>Single Python file</li>
+        <li>Linux + Windows</li>
+        <li>LAN discovery</li>
+        <li>Automatic subnet scanning</li>
+        <li>Direct IP connection</li>
+        <li>Configurable port</li>
+        <li>Terminal UI</li>
+        <li>Peer-to-peer architecture</li>
+    </ul>
+
+    <h2>Requirements</h2>
+    <p>Python 3.9+<br>A local network connection</p>
+
+    <h2>Run</h2>
+    <p><strong>Linux:</strong></p>
+    <pre><code>python3 labchat.py</code></pre>
+
+    <p><strong>Windows:</strong></p>
+    <pre><code>python labchat.py</code></pre>
+
+    <h2>First Run</h2>
+    <p>On your first run, the application will ask for a display name. This name is saved locally so you don't have to enter it every time. You can change it later using the <code>/name</code> command.</p>
+
+    <h2>Discovery</h2>
+    <p>LabChat uses UDP broadcast to automatically discover other instances on the same local network. It also supports explicit subnet scanning using the <code>/scan</code> command, which will automatically check all IPs in your local <code>/24</code> subnet for running LabChat instances.</p>
+
+    <h2>Manual Connection</h2>
+    <p>If discovery fails (due to firewalls or network isolation), you can connect directly to another user if you know their IP address:</p>
+    <pre><code>/connect 192.168.0.121:50555</code></pre>
+
+    <h2>Troubleshooting</h2>
+    <ul>
+        <li><strong>Discovery doesn't work:</strong> UDP broadcasts may be blocked by your router, or devices might be on different subnets. Try <code>/scan</code> instead.</li>
+        <li><strong>Cannot connect:</strong> Windows Firewall might be blocking incoming connections to port 50555. You may need to allow Python through the firewall.</li>
+        <li><strong>Wi-Fi Client Isolation:</strong> Public or university Wi-Fi networks often prevent devices from talking directly to each other. In this case, LabChat will not work.</li>
+        <li><strong>Wrong Subnet:</strong> If your network uses a mask other than <code>/24</code> (e.g. <code>255.255.255.0</code>), the automatic scan might not check the correct IP range.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Source Code</h2>
+    <p>Save this file as <code>labchat.py</code> and run it.</p>
+    
+    <div class="code-header">
+        <span>labchat.py</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyCode()">Copy Code</button>
+    </div>
+    <pre><code id="source-code">Loading labchat.py...</code></pre>
+
+</div>
+
+<script>
+    // Fetch the source code dynamically
+    fetch('labchat.py')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(text => {
+            document.getElementById('source-code').textContent = text;
+        })
+        .catch(error => {
+            document.getElementById('source-code').textContent = 
+                '# Error loading source code automatically.\n' +
+                '# Please view the labchat.py file directly in the repository.';
+            console.error('Error fetching labchat.py:', error);
+        });
+
+    function copyCode() {
+        const codeElement = document.getElementById('source-code');
+        const btn = document.getElementById('copyBtn');
+        
+        navigator.clipboard.writeText(codeElement.textContent).then(() => {
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            btn.textContent = 'Failed to copy';
+        });
+    }
+</script>
+
+</body>
+</html>
