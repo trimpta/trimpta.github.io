@@ -123,6 +123,7 @@ class LabChat:
         
         self.name = name or self.config.get("name")
         self.port = port or self.config.get("port", DEFAULT_PORT)
+        self.default_server = self.config.get("server", "10.10.4.154")
         
         self.instance_id = str(uuid.uuid4())
         self.local_ip = get_local_ip()
@@ -375,7 +376,8 @@ Commands:
 /disconnect            Disconnect from all active chats
 /name <new_name>       Change your name
 /status                Show network status
-/server                Show configured server/active connections
+/server                Show active connections
+/set-server <ip>       Set default server to connect on startup
 /port                  Show current port
 /clear                 Clear terminal
 /help                  Show help
@@ -404,6 +406,10 @@ Commands:
         self.start_udp_discovery()
         
         self.print_ui_header()
+        
+        if self.default_server:
+            self.print_msg(f"Attempting to connect to default server: {self.default_server}")
+            threading.Thread(target=self.connect_to, args=(self.default_server, self.port), daemon=True).start()
         
         if self.initial_scan:
             print("Scanning local network...")
@@ -481,6 +487,14 @@ Commands:
                     self.print_msg("Usage: /name <new_name>")
             elif cmd == "/status":
                 self.print_msg(f"Name: {self.name}\nIP: {self.local_ip}\nPort: {self.port}\nConnections: {len(self.connections)}")
+            elif cmd == "/set-server":
+                if len(parts) > 1:
+                    self.default_server = parts[1]
+                    self.config["server"] = self.default_server
+                    Config.save(self.config)
+                    self.print_msg(f"Default server set to {self.default_server}")
+                else:
+                    self.print_msg("Usage: /set-server <ip>")
             elif cmd == "/server":
                 if self.connections:
                     self.print_msg("Active connections:")
